@@ -187,3 +187,19 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   tmux attach-session -t principal || tmux new-session -s principal
 fi
 alias ecode="flatpak run io.elementary.code"
+
+# --- Selector interactivo de SSH con fzf ---
+sshm() {
+  local host
+  host=$(awk '/^Host / && !/\*/ {print $2}' ~/.ssh/config 2>/dev/null | fzf \
+    --height=40% \
+    --layout=reverse \
+    --border \
+    --prompt="🔌 Conectar SSH > " \
+    --preview="awk '/^Host '{}\$'/{flag=1; print; next} /^Host /{flag=0} flag' ~/.ssh/config" \
+    --preview-window=right:45%:wrap)
+
+  [ -n "$host" ] && ssh "$host"
+}
+
+alias sm='ssh media-server'

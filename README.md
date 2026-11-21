@@ -52,3 +52,4 @@ Usa el selector interactivo **`temas`** (o ejecuta cada comando directamente) pa
 * **Temas y Sync:** `temas`, `sync-dotfiles`, `pull-dotfiles`, `backup-terminal`, `restaurar-terminal`
 * **Utilidades:** `cls`, `ls`, `ll`, `la`, `lt`, `cat`
 * **Docker:** `lzd`, `dps`, `dpsa`, `dimg`, `dlogs <cont>`, `dsh <cont>`, `dstop`, `dclean`, `dcup`, `dcdown`, `dcrestart`, `dclogs`
+* **SSH:** `sshm` (menú interactivo fzf), `sm` (conexión directa a media-server)

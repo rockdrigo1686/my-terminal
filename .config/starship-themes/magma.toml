@@ -1,0 +1,32 @@
+format = """
+[»](bold #ff1e56) $username[⚡](bold #ffb703) $directory$git_branch$git_status$docker_context$character"""
+
+[username]
+show_always = true
+style_user = "bold #ff1e56"
+style_root = "bold #ffd166"
+format = "[$user]($style) "
+
+[directory]
+style = "bold #ff7b00"
+format = "[$path]($style) "
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = " "
+style = "bold #ffb703"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "bold #ffd166"
+format = '([$all_status$ahead_behind]($style) )'
+
+[docker_context]
+symbol = " "
+style = "bold #ff7b00"
+format = "via [$symbol$context]($style) "
+
+[character]
+success_symbol = "[❯](bold #ff1e56)[❯](bold #ff7b00)[❯](bold #ffb703)"
+error_symbol = "[✗](bold #ff1e56)[✗](bold #ff1e56)"

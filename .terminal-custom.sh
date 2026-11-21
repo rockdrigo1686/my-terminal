@@ -84,19 +84,34 @@ tema-neon() {
   echo "☣️ Tema completo Morado + Verde Neón activado"
 }
 
-# Selector interactivo
+
+
+tema-magma() {
+  cp ~/.config/starship-themes/magma.toml ~/.config/starship.toml
+  cp ~/.config/tmux-themes/magma.conf ~/.tmux.conf
+  cp ~/.config/lazydocker/magma.yml ~/.config/lazydocker/config.yml
+  sed -i 's/^color_theme = .*/color_theme = "magma"/' ~/.config/btop/btop.conf
+  sed -i 's/^--theme=.*/--theme="magma"/' ~/.config/bat/config
+  sed -i 's/^skin=.*/skin=magma/' ~/.config/mc/ini 2>/dev/null
+  export EZA_COLORS="di=1;33:ex=1;31:ln=1;35:fi=0;37:sn=1;31:sb=31:da=33:ur=33:uw=31:ux=35:gr=33:gw=31:gx=35:tr=33:tw=31:tx=35"
+  export FZF_DEFAULT_OPTS="--color=bg+:#4a141c,fg+:#fff1eb,hl:#ffb703,hl+:#ff1e56,border:#ff7b00,prompt:#ff1e56,pointer:#ffb703,info:#ff7b00"
+  tmux source-file ~/.tmux.conf 2>/dev/null
+  _aplicar_gnome_paleta '#170b0e' '#fff1eb' '#ffb703' '#4a141c' "['#2e141a', '#ff1e56', '#ff7b00', '#ffb703', '#ff5400', '#e63946', '#ffd166', '#fff1eb', '#7d4e57', '#ff4d6d', '#ff9100', '#ffe066', '#ff6b00', '#ff758f', '#fff3b0', '#ffffff']"
+  echo "🔥 Tema completo Magma (Rojo + Naranja + Ámbar) activado"
+}
+
 temas() {
   local opcion
-  opcion=$(printf "🌸 Rosé Pine (Suave y elegante)\n⚡ Cyber (Rosa neón + Cyan eléctrico)\n☣️  Neon (Morado + Verde neón)" | \
-    fzf --height=35% --layout=reverse --border=rounded --prompt="🎨 Elige tu tema > ")
+  opcion=$(printf "🌸 Rosé Pine (Suave y elegante)\n⚡ Cyber (Rosa neón + Cyan eléctrico)\n☣️  Neon (Morado + Verde neón)\n🔥 Magma (Rojo + Naranja + Ámbar)" | \
+    fzf --height=40% --layout=reverse --border=rounded --prompt="🎨 Elige tu tema > ")
   case "$opcion" in
     *"Rosé Pine"*) tema-rose ;;
     *"Cyber"*)     tema-cyber ;;
     *"Neon"*)      tema-neon ;;
+    *"Magma"*)     tema-magma ;;
   esac
 }
 
-# Sincronizador automático hacia ~/dotfiles y GitHub
 sync-dotfiles() {
   cp -r ~/.config/starship-themes ~/dotfiles/.config/
   cp -r ~/.config/tmux-themes ~/dotfiles/.config/
@@ -111,46 +126,31 @@ sync-dotfiles() {
   echo "☁️ Dotfiles sincronizados con GitHub"
 }
 
-# Activar Starship y tmux automáticamente
-command -v starship &> /dev/null && eval "$(starship init bash)"
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  tmux attach-session -t principal || tmux new-session -s principal
-fi
-
-# Backup y restauración local
 backup-terminal() {
   local DESTINO="$HOME/Backups-Terminal"
   local ARCHIVO="$DESTINO/terminal-setup-$(date +%Y-%m-%d_%H-%M).tar.gz"
   mkdir -p "$DESTINO"
-  tar -czf "$ARCHIVO" -C "$HOME" \
-    .bashrc .terminal-custom.sh .tmux.conf \
-    .config/starship.toml .config/starship-themes \
-    .config/tmux-themes .config/lazydocker \
-    .config/btop .config/bat .config/mc \
-    .local/share/mc/skins 2>/dev/null
+  tar -czf "$ARCHIVO" -C "$HOME" .bashrc .terminal-custom.sh .tmux.conf .config/starship.toml .config/starship-themes .config/tmux-themes .config/lazydocker .config/btop .config/bat .config/mc .local/share/mc/skins 2>/dev/null
   echo "✅ Respaldo guardado en: $ARCHIVO"
 }
 
 restaurar-terminal() {
   local DESTINO="$HOME/Backups-Terminal"
-  local ARCHIVO
-  ARCHIVO=$(ls -1t "$DESTINO"/*.tar.gz 2>/dev/null | fzf --height=35% --layout=reverse --border=rounded --prompt="📦 Elige respaldo a restaurar > ")
+  local ARCHIVO=$(ls -1t "$DESTINO"/*.tar.gz 2>/dev/null | fzf --height=35% --layout=reverse --border=rounded --prompt="📦 Elige respaldo > ")
   if [ -n "$ARCHIVO" ]; then
-    tar -xzf "$ARCHIVO" -C "$HOME"
-    bat cache --build 2>/dev/null
-    tmux source-file ~/.tmux.conf 2>/dev/null
-    source ~/.bashrc
-    echo "♻️ Configuración restaurada desde: $ARCHIVO"
+    tar -xzf "$ARCHIVO" -C "$HOME" && bat cache --build 2>/dev/null && tmux source-file ~/.tmux.conf 2>/dev/null && source ~/.bashrc
+    echo "♻️ Configuración restaurada"
   fi
 }
 
-# Traer cambios desde GitHub en cualquier PC
 pull-dotfiles() {
   (cd ~/dotfiles && git pull)
-  cp -r ~/dotfiles/.config/* ~/.config/
-  cp -r ~/dotfiles/.local/share/mc/* ~/.local/share/mc/
-  cp ~/dotfiles/.tmux.conf ~/.tmux.conf
-  bat cache --build 2>/dev/null
-  source ~/.bashrc
+  cp -r ~/dotfiles/.config/* ~/.config/ && cp -r ~/dotfiles/.local/share/mc/* ~/.local/share/mc/ && cp ~/dotfiles/.tmux.conf ~/.tmux.conf
+  bat cache --build 2>/dev/null && source ~/.bashrc
   echo "⬇️ Dotfiles actualizados desde GitHub"
 }
+
+command -v starship &> /dev/null && eval "$(starship init bash)"
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  tmux attach-session -t principal || tmux new-session -s principal
+fi

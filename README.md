@@ -15,6 +15,7 @@ Usa el selector interactivo **`temas`** (o ejecuta cada comando directamente) pa
 | **`tema-neon`** | ☣️ **Neon** | Caja curva de 2 líneas (`╭─ user ◈ ~`) | Morado eléctrico (`#b829ea`), Verde neón (`#00ff87`), Fondo (`#100b1c`) |
 | **`tema-magma`** | 🔥 **Magma** | Doble chevron (`» user ⚡ ~ ❯❯❯`) | Rojo carmesí (`#ff1e56`), Naranja (`#ff7b00`), Ámbar (`#ffb703`), Fondo (`#170b0e`) |
 | **`tema-cobalt`** | 🧊 **Cobalt** | Geométrico diagonal (`❖ user ╱ ~ ❯❯`) | Azul marino (`#0b132b`), Azul cobalto (`#3a86ff`), Blanco (`#f8f9fa`), Rojo (`#ef233c`) |
+| **`tema-phantom`** | 👻 **Phantom** | Espectral (`◆ user ▸ ~ ❯❯`) | Sombra morada (`#9d4edd`), Ojos carmesí (`#ff2a6d`), Lavanda (`#e0aaff`), Fondo (`#140d1f`) |
 
 ---
 

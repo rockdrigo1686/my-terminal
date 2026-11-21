@@ -203,3 +203,39 @@ sshm() {
 }
 
 alias sm='ssh media-server'
+
+# --- Menú interactivo de Docker con fzf ---
+dmenu() {
+  local accion cont sub
+  accion=$(printf "📦 Gestionar contenedor (logs/shell/restart)\n🚀 Docker Compose UP (-d)\n🛑 Docker Compose DOWN\n🔄 Docker Compose RESTART\n🐳 Abrir Lazydocker\n🧹 Limpiar sistema (prune)" | fzf \
+    --height=45% --layout=reverse --border --prompt="🐳 Docker > ")
+
+  [ -z "$accion" ] && return
+
+  case "$accion" in
+    *"Gestionar contenedor"*)
+      cont=$(docker ps -a --format "{{.Names}}\t{{.Status}}\t{{.Image}}" | fzf \
+        --height=60% --layout=reverse --border --prompt="📦 Contenedor > " \
+        --preview="docker logs --tail 25 {1} 2>&1" \
+        --preview-window=right:55%:wrap | awk '{print $1}')
+      [ -z "$cont" ] && return
+
+      sub=$(printf "📜 Ver logs en vivo\n💻 Entrar a shell (bash/sh)\n🔄 Reiniciar\n▶️  Iniciar\n⏹️  Detener\n🗑️  Eliminar" | fzf \
+        --height=35% --layout=reverse --border --prompt="⚡ $cont > ")
+
+      case "$sub" in
+        *"logs"*)      docker logs -f --tail 50 "$cont" ;;
+        *"shell"*)     docker exec -it "$cont" sh -c "command -v bash >/dev/null && exec bash || exec sh" ;;
+        *"Reiniciar"*) docker restart "$cont" ;;
+        *"Iniciar"*)   docker start "$cont" ;;
+        *"Detener"*)   docker stop "$cont" ;;
+        *"Eliminar"*)  docker rm -f "$cont" ;;
+      esac
+      ;;
+    *"UP"*)         docker compose up -d ;;
+    *"DOWN"*)       docker compose down ;;
+    *"RESTART"*)    docker compose restart ;;
+    *"Lazydocker"*) lazydocker ;;
+    *"Limpiar"*)    docker system prune -f ;;
+  esac
+}

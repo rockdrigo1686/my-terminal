@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://apple.com">
+<plist version="1.0">
+<dict>
+  <key>name</key><string>rosa-cyan</string>
+  <key>settings</key>
+  <array>
+    <dict><key>settings</key><dict>
+      <key>background</key><string>#13111c</string>
+      <key>foreground</key><string>#f8f8f2</string>
+      <key>caret</key><string>#ff2a85</string>
+      <key>selection</key><string>#251d3a</string>
+    </dict></dict>
+    <dict><key>scope</key><string>comment</string><key>settings</key><dict><key>foreground</key><string>#6272a4</string><key>fontStyle</key><string>italic</string></dict></dict>
+    <dict><key>scope</key><string>string</string><key>settings</key><dict><key>foreground</key><string>#8be9fd</string></dict></dict>
+    <dict><key>scope</key><string>constant.numeric, constant.language</string><key>settings</key><dict><key>foreground</key><string>#bd93f9</string></dict></dict>
+    <dict><key>scope</key><string>keyword, storage.type, storage.modifier</string><key>settings</key><dict><key>foreground</key><string>#ff2a85</string><key>fontStyle</key><string>bold</string></dict></dict>
+    <dict><key>scope</key><string>entity.name.function, variable.parameter</string><key>settings</key><dict><key>foreground</key><string>#00f5d4</string></dict></dict>
+    <dict><key>scope</key><string>entity.name.type, entity.name.class, support.type</string><key>settings</key><dict><key>foreground</key><string>#00bbf9</string></dict></dict>
+    <dict><key>scope</key><string>variable, meta.property-name, support.type.property-name</string><key>settings</key><dict><key>foreground</key><string>#ff79c6</string></dict></dict>
+  </array>
+</dict>
+</plist>

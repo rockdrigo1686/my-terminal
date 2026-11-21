@@ -8,7 +8,7 @@ mkdir -p ~/.config ~/.local/bin ~/.local/share/fonts ~/.local/share/mc
 cp -r "$DIR/.config/"* ~/.config/
 cp -r "$DIR/.local/share/mc/"* ~/.local/share/mc/
 cp "$DIR/.tmux.conf" ~/.tmux.conf
-cp "$DIR/.terminal-custom.sh" ~/.terminal-custom.sh
+ln -sf "$DIR/.terminal-custom.sh" ~/.terminal-custom.sh
 
 if ! grep -q "source ~/.terminal-custom.sh" ~/.bashrc; then
   echo -e "\n[ -f ~/.terminal-custom.sh ] && source ~/.terminal-custom.sh" >> ~/.bashrc

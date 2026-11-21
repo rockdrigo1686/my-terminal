@@ -1,0 +1,30 @@
+format = """
+$username\
+$directory\
+$git_branch\
+$docker_context\
+$character"""
+
+[username]
+show_always = true
+style_user = "bold #ff79c6"
+format = "[$user]($style) [✦](bold #8be9fd) "
+
+[directory]
+style = "bold #8be9fd"
+format = "[$path]($style) "
+truncation_length = 3
+
+[git_branch]
+symbol = " "
+style = "bold #ff79c6"
+format = "[$symbol$branch]($style) "
+
+[docker_context]
+symbol = "🐳 "
+style = "bold #8be9fd"
+format = "[$symbol$context]($style) "
+
+[character]
+success_symbol = "[➜](bold #ff79c6)"
+error_symbol = "[✗](bold #ff5555)"

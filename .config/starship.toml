@@ -1,32 +1,32 @@
 format = """
-[❖](bold #ef233c) $username[╱](bold #3a86ff) $directory$git_branch$git_status$docker_context$character"""
+[┃](bold #ebbcba) $username[✿](bold #eb6f92) $directory$git_branch$git_status$docker_context$character"""
 
 [username]
 show_always = true
-style_user = "bold #f8f9fa"
-style_root = "bold #ef233c"
+style_user = "bold #eb6f92"
+style_root = "bold #eb6f92"
 format = "[$user]($style) "
 
 [directory]
-style = "bold #4cc9f0"
+style = "bold #9ccfd8"
 format = "[$path]($style) "
-truncation_length = 1
-truncate_to_repo = false
+truncation_length = 3
+truncation_symbol = "…/"
 
 [git_branch]
 symbol = " "
-style = "bold #3a86ff"
+style = "bold #c4a7e7"
 format = "[$symbol$branch]($style) "
 
 [git_status]
-style = "bold #ef233c"
+style = "bold #f6c177"
 format = '([$all_status$ahead_behind]($style) )'
 
 [docker_context]
 symbol = " "
-style = "bold #4cc9f0"
+style = "bold #31748f"
 format = "[$symbol$context]($style) "
 
 [character]
-success_symbol = "[❯](bold #3a86ff)[❯](bold #f8f9fa)"
-error_symbol = "[✗](bold #ef233c)"
+success_symbol = "[❯](bold #eb6f92)"
+error_symbol = "[❯](bold #f6c177)"

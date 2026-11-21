@@ -37,7 +37,7 @@ Usa el selector interactivo **`temas`** (o ejecuta cada comando directamente) pa
 
 1. **Clona este repositorio y ejecuta el instalador:**
    ```bash
-   git clone https://github.com ~/dotfiles
+   git clone https://github.com/rockdrigo1686/my-terminal.git ~/dotfiles
    cd ~/dotfiles
    ./install.sh
    ```

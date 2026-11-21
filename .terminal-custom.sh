@@ -186,3 +186,4 @@ command -v starship &> /dev/null && eval "$(starship init bash)"
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach-session -t principal || tmux new-session -s principal
 fi
+alias ecode="flatpak run io.elementary.code"

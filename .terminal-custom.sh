@@ -100,15 +100,31 @@ tema-magma() {
   echo "🔥 Tema completo Magma (Rojo + Naranja + Ámbar) activado"
 }
 
+
+tema-cobalt() {
+  cp ~/.config/starship-themes/cobalt.toml ~/.config/starship.toml
+  cp ~/.config/tmux-themes/cobalt.conf ~/.tmux.conf
+  cp ~/.config/lazydocker/cobalt.yml ~/.config/lazydocker/config.yml
+  sed -i 's/^color_theme = .*/color_theme = "cobalt"/' ~/.config/btop/btop.conf
+  sed -i 's/^--theme=.*/--theme="cobalt"/' ~/.config/bat/config
+  sed -i 's/^skin=.*/skin=cobalt/' ~/.config/mc/ini 2>/dev/null
+  export EZA_COLORS="di=1;34:ex=1;31:ln=1;36:fi=0;37:sn=1;36:sb=36:da=34:ur=34:uw=31:ux=37:gr=34:gw=31:gx=37:tr=34:tw=31:tx=37"
+  export FZF_DEFAULT_OPTS="--color=bg+:#253c6e,fg+:#f8f9fa,hl:#ef233c,hl+:#4cc9f0,border:#3a86ff,prompt:#ef233c,pointer:#4cc9f0,info:#a9d6e5"
+  tmux source-file ~/.tmux.conf 2>/dev/null
+  _aplicar_gnome_paleta '#0b132b' '#f8f9fa' '#ef233c' '#253c6e' "['#1c2541', '#ef233c', '#4cc9f0', '#a9d6e5', '#3a86ff', '#d90429', '#90e0ef', '#f8f9fa', '#5c6b9c', '#ff4d6d', '#72efdd', '#caf0f8', '#4895ef', '#ff758f', '#ade8f4', '#ffffff']"
+  echo "🧊 Tema completo Cobalt (Azul Marino + Blanco + Rojo) activado"
+}
+
 temas() {
   local opcion
-  opcion=$(printf "🌸 Rosé Pine (Suave y elegante)\n⚡ Cyber (Rosa neón + Cyan eléctrico)\n☣️  Neon (Morado + Verde neón)\n🔥 Magma (Rojo + Naranja + Ámbar)" | \
-    fzf --height=40% --layout=reverse --border=rounded --prompt="🎨 Elige tu tema > ")
+  opcion=$(printf "🌸 Rosé Pine (Suave y elegante)\n⚡ Cyber (Rosa neón + Cyan eléctrico)\n☣️  Neon (Morado + Verde neón)\n🔥 Magma (Rojo + Naranja + Ámbar)\n🧊 Cobalt (Azul Marino + Blanco + Rojo)" | \
+    fzf --height=45% --layout=reverse --border=rounded --prompt="🎨 Elige tu tema > ")
   case "$opcion" in
     *"Rosé Pine"*) tema-rose ;;
     *"Cyber"*)     tema-cyber ;;
     *"Neon"*)      tema-neon ;;
     *"Magma"*)     tema-magma ;;
+    *"Cobalt"*)    tema-cobalt ;;
   esac
 }
 

@@ -10,13 +10,13 @@ format = "[$user]($style) "
 [directory]
 style = "bold #4cc9f0"
 format = "[$path]($style) "
-truncation_length = 3
-truncation_symbol = "…/"
+truncation_length = 1
+truncate_to_repo = false
 
 [git_branch]
 symbol = " "
 style = "bold #3a86ff"
-format = "on [$symbol$branch]($style) "
+format = "[$symbol$branch]($style) "
 
 [git_status]
 style = "bold #ef233c"
@@ -25,7 +25,7 @@ format = '([$all_status$ahead_behind]($style) )'
 [docker_context]
 symbol = " "
 style = "bold #4cc9f0"
-format = "via [$symbol$context]($style) "
+format = "[$symbol$context]($style) "
 
 [character]
 success_symbol = "[❯](bold #3a86ff)[❯](bold #f8f9fa)"

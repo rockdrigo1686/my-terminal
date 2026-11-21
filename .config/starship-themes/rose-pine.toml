@@ -1,5 +1,5 @@
 format = """
-[┃](bold #ebbcba) $username[•](bold #6e6a86) $directory$git_branch$git_status$docker_context$character"""
+[┃](bold #ebbcba) $username[✿](bold #eb6f92) $directory$git_branch$git_status$docker_context$character"""
 
 [username]
 show_always = true
